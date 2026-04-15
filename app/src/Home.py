@@ -33,14 +33,14 @@ SideBarLinks(show_home=True)
 # ***************************************************
 
 logger.info("Loading the Home page of the app")
-st.title('CS 3200 Project Template')
+st.title('Bostonability')
 st.write('#### Hi! As which user would you like to log in?')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user
 # can click to MIMIC logging in as that mock user.
 
-if st.button("Act as John, a Political Strategy Advisor",
+if st.button("Act as Paul Baker, a Data Analyst",
              type='primary',
              use_container_width=True):
     # when user clicks the button, they are now considered authenticated
@@ -49,24 +49,24 @@ if st.button("Act as John, a Political Strategy Advisor",
     st.session_state['role'] = 'pol_strat_advisor'
     # we add the first name of the user (so it can be displayed on
     # subsequent pages).
-    st.session_state['first_name'] = 'John'
+    st.session_state['first_name'] = 'Paul'
     # finally, we ask streamlit to switch to another page, in this case, the
     # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
+    logger.info("Logging in as Paul Baker")
     st.switch_page('pages/00_Pol_Strat_Home.py')
 
-if st.button('Act as Mohammad, a USAID Worker',
+if st.button('Act as Sally Locke, a daily user',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
+    st.session_state['first_name'] = 'Sally'
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
-if st.button('Act as System Administrator',
+if st.button('Act as Wilson Lampisyobiford, a System Administrator',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
+    st.session_state['first_name'] = 'Wilson'
     st.switch_page('pages/20_Admin_Home.py')
