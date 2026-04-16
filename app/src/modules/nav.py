@@ -19,18 +19,18 @@ def about_page_nav():
 
 def pol_strat_home_nav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/00_Analyst_Home.py", label="Data Analyst Home", icon="👤"
     )
 
 
 def world_bank_viz_nav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Accessibility_Dashboard.py", label="Accessibility Dashboard", icon="🏦"
     )
 
 
 def map_demo_nav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+    st.sidebar.page_link("pages/02_Analyst_Trends_Exports.py", label="Trends & Exports", icon="🗺️")
 
 
 # ---- Role: usaid_worker -----------------------------------------------------
