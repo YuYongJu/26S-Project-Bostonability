@@ -61,7 +61,7 @@ if st.button('Act as Sally Locke, a daily user',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'base_user'
     st.session_state['first_name'] = 'Sally'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.switch_page('pages/10_Basic_User_Home.py')
 
 if st.button('Act as Wilson Lampisyobiford, a System Administrator',
              type='primary',

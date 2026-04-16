@@ -37,9 +37,22 @@ def map_demo_nav():
 
 def usaid_worker_home_nav():
     st.sidebar.page_link(
-        "pages/10_USAID_Worker_Home.py", label="USAID Worker Home", icon="🏠"
+        "pages/10_Basic_User_Home.py", label="User Home", icon="🏠"
     )
 
+def prediction_nav():
+    st.sidebar.page_link(
+    "pages/11_Report_Obstruction.py", label="Report Obstruction", icon="📈"
+)
+
+#OLD API TEST TAB
+def api_test_nav():
+    st.sidebar.page_link("pages/12_Find_Accessibility_Info.py", label="Find Accessibility_Info", icon="🛜")
+
+def classification_nav():
+    st.sidebar.page_link(
+        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
+    )
 
 def ngo_directory_nav():
     st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
@@ -48,21 +61,6 @@ def ngo_directory_nav():
 def add_ngo_nav():
     st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
 
-
-def prediction_nav():
-    st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
-
-
-def api_test_nav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-
-def classification_nav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
 
 
 # ---- Role: administrator ----------------------------------------------------
