@@ -19,7 +19,7 @@ def list_users():
         query = """
             SELECT u.user_id, u.first_name, u.last_name, u.user_email,
                    u.phone_number, u.preferred_language,
-                   u.demographics_age, u.demographics_gender, u.demographics_ethinicity
+                   u.demographics_age, u.demographics_gender, u.demographics_ethnicity
             FROM `user` u
         """
         params = []
@@ -60,7 +60,7 @@ def create_user():
             INSERT INTO `user`
                 (first_name, last_name, user_email, phone_number,
                  preferred_language, demographics_age,
-                 demographics_gender, demographics_ethinicity)
+                 demographics_gender, demographics_ethnicity)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """,
             (
@@ -71,7 +71,7 @@ def create_user():
                 data.get("preferred_language"),
                 data.get("demographics_age"),
                 data.get("demographics_gender"),
-                data.get("demographics_ethinicity"),
+                data.get("demographics_ethnicity"),
             ),
         )
         get_db().commit()
@@ -138,7 +138,7 @@ def update_user(user_id):
         allowed = [
             "first_name", "last_name", "user_email", "phone_number",
             "preferred_language", "demographics_age",
-            "demographics_gender", "demographics_ethinicity",
+            "demographics_gender", "demographics_ethnicity",
         ]
         updates = [f"{f} = %s" for f in allowed if f in data]
         params = [data[f] for f in allowed if f in data]
