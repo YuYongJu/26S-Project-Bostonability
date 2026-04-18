@@ -115,3 +115,23 @@ CREATE TABLE accessibility_report (
     FOREIGN KEY (issue_type_id) REFERENCES issue_type(issue_type_id) ON DELETE RESTRICT,
     FOREIGN KEY (user_id)       REFERENCES `user`(user_id)           ON DELETE CASCADE
 );
+
+CREATE TABLE accessibility_ticket (
+    ticket_id     INT PRIMARY KEY AUTO_INCREMENT,
+    ticket_status VARCHAR(50) NOT NULL,
+    ticket_date   DATE        NOT NULL,
+    ticket_time   TIME,
+    report_id     INT,
+    issue_type_id INT,
+    FOREIGN KEY (report_id)     REFERENCES report(report_id)         ON DELETE SET NULL,
+    FOREIGN KEY (issue_type_id) REFERENCES issue_type(issue_type_id) ON DELETE SET NULL
+);
+
+CREATE TABLE action_log (
+    log_id          INT PRIMARY KEY AUTO_INCREMENT,
+    user_id         INT,
+    action_type     VARCHAR(50),
+    log_description VARCHAR(255),
+    timestamp       DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES `user`(user_id) ON DELETE SET NULL
+);
