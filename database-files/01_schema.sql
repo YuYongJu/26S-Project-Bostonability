@@ -117,9 +117,9 @@ CREATE TABLE IF NOT EXISTS Location_Obstruction (
 );
 
 CREATE TABLE IF NOT EXISTS Disability_Obstruction (
+    disability_obstruction_id INT PRIMARY KEY,
     disability_id INT,
     obstruction_id INT,
-    PRIMARY KEY (disability_id, obstruction_id),
     FOREIGN KEY (disability_id) REFERENCES Disability(disability_id),
     FOREIGN KEY (obstruction_id) REFERENCES Obstructions(obstruction_id)
 );
