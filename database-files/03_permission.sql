@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO Permission (permission_id, action_type, resource) VALUES (1, 'read', 'report');
 INSERT INTO Permission (permission_id, action_type, resource) VALUES (2, 'update', 'ticket');
 INSERT INTO Permission (permission_id, action_type, resource) VALUES (3, 'create', 'user');

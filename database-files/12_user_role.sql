@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO User_Role (user_id, role_id) VALUES (6, 2);
 INSERT INTO User_Role (user_id, role_id) VALUES (22, 1);
 INSERT INTO User_Role (user_id, role_id) VALUES (10, 3);
