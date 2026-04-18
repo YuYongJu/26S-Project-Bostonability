@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS issue_type (
 );
 
 CREATE TABLE IF NOT EXISTS `user` (
-    user_id INT PRIMARY KEY,
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     user_email VARCHAR(255) NOT NULL,
@@ -52,13 +52,13 @@ CREATE TABLE IF NOT EXISTS location (
 );
 
 CREATE TABLE IF NOT EXISTS report (
-    report_id INT PRIMARY KEY,
+    report_id INT PRIMARY KEY AUTO_INCREMENT,
     report_date DATETIME,
     report_type VARCHAR(50),
     report_status VARCHAR(50),
     past_report_status VARCHAR(50),
     urgency INT,
-    description VARCHAR(500),
+    description TEXT,
     location_id INT,
     user_id INT,
     FOREIGN KEY (location_id) REFERENCES location(location_id) ON DELETE SET NULL,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS accessibility_report (
 );
 
 CREATE TABLE IF NOT EXISTS accessibility_ticket (
-    ticket_id INT PRIMARY KEY,
+    ticket_id INT PRIMARY KEY AUTO_INCREMENT,
     ticket_status VARCHAR(50),
     ticket_date DATE,
     ticket_time TIME,
