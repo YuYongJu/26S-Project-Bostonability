@@ -96,12 +96,12 @@ def SideBarLinks(show_home=False):
 
     if st.session_state["authenticated"]:
 
-        if st.session_state["role"] == "pol_strat_advisor":
+        if st.session_state["role"] == "analyst":
             pol_strat_home_nav()
             world_bank_viz_nav()
             map_demo_nav()
 
-        if st.session_state["role"] == "usaid_worker":
+        if st.session_state["role"] == "user":
             usaid_worker_home_nav()
             ngo_directory_nav()
             add_ngo_nav()
@@ -109,7 +109,7 @@ def SideBarLinks(show_home=False):
             api_test_nav()
             classification_nav()
 
-        if st.session_state["role"] == "administrator":
+        if st.session_state["role"] == "admin":
             admin_home_nav()
             ml_model_mgmt_nav()
 
