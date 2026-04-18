@@ -59,7 +59,7 @@ if st.button('Act as Sally Locke, a daily user',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'base_user'
+    st.session_state['role'] = 'user'
     st.session_state['first_name'] = 'Sally'
     st.switch_page('pages/10_Basic_User_Home.py')
 
@@ -67,6 +67,6 @@ if st.button('Act as Wilson Lampisyobiford, a System Administrator',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
+    st.session_state['role'] = 'admin'
     st.session_state['first_name'] = 'Wilson'
     st.switch_page('pages/20_Admin_Home.py')
