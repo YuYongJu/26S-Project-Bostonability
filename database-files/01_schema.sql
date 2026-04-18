@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Disability (
 CREATE TABLE IF NOT EXISTS Obstructions (
     obstruction_id INT PRIMARY KEY,
     obstruction_name VARCHAR(100) NOT NULL,
-    obstruction_desc VARCHAR(255),
+    obstruction_desc VARCHAR(500),
     severity_level INT
 );
 
