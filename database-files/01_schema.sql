@@ -1,71 +1,125 @@
 DROP DATABASE IF EXISTS ngo_db;
 CREATE DATABASE IF NOT EXISTS ngo_db;
-
 USE ngo_db;
 
-
-CREATE TABLE IF NOT EXISTS WorldNGOs (
-    NGO_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Country VARCHAR(100) NOT NULL,
-    Founding_Year INTEGER,
-    Focus_Area VARCHAR(100),
-    Website VARCHAR(255)
+CREATE TABLE IF NOT EXISTS Role (
+    role_id INT PRIMARY KEY,
+    role_name VARCHAR(100) NOT NULL,
+    role_description VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS Projects (
-    Project_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Project_Name VARCHAR(255) NOT NULL,
-    Focus_Area VARCHAR(100),
-    Budget DECIMAL(15, 2),
-    NGO_ID INT,
-    Start_Date DATE,
-    End_Date DATE,
-    FOREIGN KEY (NGO_ID) REFERENCES WorldNGOs(NGO_ID)
+CREATE TABLE IF NOT EXISTS Permission (
+    permission_id INT PRIMARY KEY,
+    action_type VARCHAR(50) NOT NULL,
+    resource VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Donors (
-    Donor_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Donor_Name VARCHAR(255) NOT NULL,
-    Donor_Type ENUM('Individual', 'Organization') NOT NULL,
-    Donation_Amount DECIMAL(15, 2),
-    NGO_ID INT,
-    FOREIGN KEY (NGO_ID) REFERENCES WorldNGOs(NGO_ID)
+CREATE TABLE IF NOT EXISTS Disability (
+    disability_id INT PRIMARY KEY,
+    disability_name VARCHAR(100) NOT NULL
 );
 
-INSERT INTO WorldNGOs (Name, Country, Founding_Year, Focus_Area, Website)
-VALUES
-('World Wildlife Fund', 'United States', 1961, 'Environmental Conservation', 'https://www.worldwildlife.org'),
-('Doctors Without Borders', 'France', 1971, 'Medical Relief', 'https://www.msf.org'),
-('Oxfam International', 'United Kingdom', 1995, 'Poverty and Inequality', 'https://www.oxfam.org'),
-('Amnesty International', 'United Kingdom', 1961, 'Human Rights', 'https://www.amnesty.org'),
-('Save the Children', 'United States', 1919, 'Child Welfare', 'https://www.savethechildren.org'),
-('Greenpeace', 'Netherlands', 1971, 'Environmental Protection', 'https://www.greenpeace.org'),
-('International Red Cross', 'Switzerland', 1863, 'Humanitarian Aid', 'https://www.icrc.org'),
-('CARE International', 'Switzerland', 1945, 'Global Poverty', 'https://www.care-international.org'),
-('Habitat for Humanity', 'United States', 1976, 'Affordable Housing', 'https://www.habitat.org'),
-('Plan International', 'United Kingdom', 1937, 'Child Rights', 'https://plan-international.org');
-
-INSERT INTO Projects (Project_Name, Focus_Area, Budget, NGO_ID, Start_Date, End_Date)
-VALUES
-('Save the Amazon', 'Environmental Conservation', 5000000.00, 1, '2022-01-01', '2024-12-31'),
-('Emergency Medical Aid in Syria', 'Medical Relief', 3000000.00, 2, '2023-03-01', '2023-12-31'),
-('Education for All', 'Poverty and Inequality', 2000000.00, 3, '2021-06-01', '2025-05-31'),
-('Human Rights Advocacy in Asia', 'Human Rights', 1500000.00, 4, '2022-09-01', '2023-08-31'),
-('Child Nutrition Program', 'Child Welfare', 2500000.00, 5, '2022-01-01', '2024-01-01');
-
-INSERT INTO Donors (Donor_Name, Donor_Type, Donation_Amount, NGO_ID)
-VALUES
-('Bill & Melinda Gates Foundation', 'Organization', 10000000.00, 1),
-('Elon Musk', 'Individual', 5000000.00, 2),
-('Google.org', 'Organization', 2000000.00, 3),
-('Open Society Foundations', 'Organization', 3000000.00, 4),
-('Anonymous Philanthropist', 'Individual', 1000000.00, 5);
-
-CREATE TABLE model1_params (
-    sequence_number INT,
-    beta_vals TEXT
+CREATE TABLE IF NOT EXISTS Obstructions (
+    obstruction_id INT PRIMARY KEY,
+    obstruction_name VARCHAR(100) NOT NULL,
+    obstruction_desc VARCHAR(255),
+    severity_level INT
 );
 
-INSERT INTO model1_params (sequence_number, beta_vals) VALUES
-(1, '[0.25, 0.45, 0.67]');
+CREATE TABLE IF NOT EXISTS Issue_Type (
+    issue_type_id INT PRIMARY KEY,
+    issue_type_name VARCHAR(100) NOT NULL,
+    issue_category VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS User (
+    user_id INT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(50),
+    preferred_language VARCHAR(50),
+    demographics_age INT,
+    demographics_gender VARCHAR(50),
+    demographics_ethnicity VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS Location (
+    location_id INT PRIMARY KEY,
+    street_name VARCHAR(255) NOT NULL,
+    neighborhood_name VARCHAR(100),
+    zip_code VARCHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS Report (
+    report_id INT PRIMARY KEY,
+    report_date DATETIME,
+    report_type VARCHAR(50),
+    report_status VARCHAR(50),
+    urgency INT,
+    description VARCHAR(255),
+    location_id INT,
+    FOREIGN KEY (location_id) REFERENCES Location(location_id)
+);
+
+CREATE TABLE IF NOT EXISTS Accessibility_Report (
+    report_id INT PRIMARY KEY,
+    issue_type_id INT,
+    report_status VARCHAR(50),
+    photo_url VARCHAR(255),
+    user_id INT,
+    FOREIGN KEY (report_id) REFERENCES Report(report_id),
+    FOREIGN KEY (issue_type_id) REFERENCES Issue_Type(issue_type_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS Accessibility_Ticket (
+    ticket_id INT PRIMARY KEY,
+    ticket_status VARCHAR(50),
+    ticket_date DATE,
+    ticket_time TIME,
+    report_id INT,
+    issue_type_id INT,
+    FOREIGN KEY (report_id) REFERENCES Report(report_id),
+    FOREIGN KEY (issue_type_id) REFERENCES Issue_Type(issue_type_id)
+);
+
+CREATE TABLE IF NOT EXISTS User_Role (
+    user_id INT,
+    role_id INT,
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (role_id) REFERENCES Role(role_id)
+);
+
+CREATE TABLE IF NOT EXISTS User_Disability (
+    user_id INT,
+    disability_id INT,
+    PRIMARY KEY (user_id, disability_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (disability_id) REFERENCES Disability(disability_id)
+);
+
+CREATE TABLE IF NOT EXISTS Role_Permission (
+    role_id INT,
+    permission_id INT,
+    PRIMARY KEY (role_id, permission_id),
+    FOREIGN KEY (role_id) REFERENCES Role(role_id),
+    FOREIGN KEY (permission_id) REFERENCES Permission(permission_id)
+);
+
+CREATE TABLE IF NOT EXISTS Location_Obstruction (
+    location_id INT,
+    obstruction_id INT,
+    PRIMARY KEY (location_id, obstruction_id),
+    FOREIGN KEY (location_id) REFERENCES Location(location_id),
+    FOREIGN KEY (obstruction_id) REFERENCES Obstructions(obstruction_id)
+);
+
+CREATE TABLE IF NOT EXISTS Disability_Obstruction (
+    disability_id INT,
+    obstruction_id INT,
+    PRIMARY KEY (disability_id, obstruction_id),
+    FOREIGN KEY (disability_id) REFERENCES Disability(disability_id),
+    FOREIGN KEY (obstruction_id) REFERENCES Obstructions(obstruction_id)
+);
