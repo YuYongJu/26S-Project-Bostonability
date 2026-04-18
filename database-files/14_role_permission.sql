@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO Role_Permission (role_id, permission_id) VALUES (3, 1);
 INSERT INTO Role_Permission (role_id, permission_id) VALUES (2, 0);
 INSERT INTO Role_Permission (role_id, permission_id) VALUES (3, 0);

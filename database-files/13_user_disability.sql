@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO User_Disability (user_id, disability_id) VALUES (39, 7);
 INSERT INTO User_Disability (user_id, disability_id) VALUES (1, 23);
 INSERT INTO User_Disability (user_id, disability_id) VALUES (27, 19);

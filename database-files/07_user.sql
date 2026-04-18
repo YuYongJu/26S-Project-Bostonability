@@ -1,3 +1,6 @@
+USE ngo_db;
+
+
 INSERT INTO User (user_id, first_name, last_name, user_email, phone_number, preferred_language, demographics_age, demographics_gender, demographics_ethnicity) VALUES (1, 'Verge', 'Vaughton', 'vvaughton0@mozilla.org', '251-847-1939', 'English', 69, 'Male', 'White');
 INSERT INTO User (user_id, first_name, last_name, user_email, phone_number, preferred_language, demographics_age, demographics_gender, demographics_ethnicity) VALUES (2, 'Marlin', 'Brosel', 'mbrosel1@earthlink.net', '125-142-8349', 'Hindi', 74, 'Male', 'White');
 INSERT INTO User (user_id, first_name, last_name, user_email, phone_number, preferred_language, demographics_age, demographics_gender, demographics_ethnicity) VALUES (3, 'Cchaddie', 'Thayre', 'cthayre2@friendfeed.com', '616-232-5254', 'English', 52, 'Male', 'Other');

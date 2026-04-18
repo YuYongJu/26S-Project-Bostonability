@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO Accessibility_Ticket (ticket_id, ticket_status, ticket_date, ticket_time, report_id, issue_type_id) VALUES (1, 'Closed', '5/4/2025', '12:59 AM', 8, 2);
 INSERT INTO Accessibility_Ticket (ticket_id, ticket_status, ticket_date, ticket_time, report_id, issue_type_id) VALUES (2, 'Resolved', '4/8/2026', '9:52 AM', 45, 2);
 INSERT INTO Accessibility_Ticket (ticket_id, ticket_status, ticket_date, ticket_time, report_id, issue_type_id) VALUES (3, 'Assigned', '6/1/2025', '8:25 PM', 1, 4);

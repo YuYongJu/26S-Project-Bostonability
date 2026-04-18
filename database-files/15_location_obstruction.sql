@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO Location_Obstruction (location_id, obstruction_id) VALUES (29, 3);
 INSERT INTO Location_Obstruction (location_id, obstruction_id) VALUES (21, 1);
 INSERT INTO Location_Obstruction (location_id, obstruction_id) VALUES (40, 5);
