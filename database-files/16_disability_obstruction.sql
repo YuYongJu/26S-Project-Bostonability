@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO Disability_Obstruction (disability_id, obstruction_id) VALUES (6, 4);
 INSERT INTO Disability_Obstruction (disability_id, obstruction_id) VALUES (5, 3);
 INSERT INTO Disability_Obstruction (disability_id, obstruction_id) VALUES (2, 1);

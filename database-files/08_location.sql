@@ -1,3 +1,5 @@
+USE ngo_db;
+
 INSERT INTO Location (location_id, street_name, neighborhood_name, zip_code) VALUES (1, '572 Clove Way', 'Roxbury', 5);
 INSERT INTO Location (location_id, street_name, neighborhood_name, zip_code) VALUES (2, '54 Derek Lane', 'Allston', 5);
 INSERT INTO Location (location_id, street_name, neighborhood_name, zip_code) VALUES (3, '49511 Hanson Alley', 'South End', 5);
