@@ -19,13 +19,18 @@ NEIGHBORHOODS = ["Any", "Roxbury", "Allston", "South End", "Back Bay",
 
 SEVERITY_LABEL = {1: "Minor", 2: "Low", 3: "Moderate", 4: "High", 5: "Critical"}
 
+if "nb_filter" not in st.session_state:
+    st.session_state["nb_filter"] = "Any"
+
 st.markdown("#### Search")
 sc1, sc2, sc3 = st.columns([3, 2, 1])
 
 with sc1:
     street_query = st.text_input("Street name", placeholder="e.g. Tremont, Blue Hill Ave")
 with sc2:
-    neighborhood_filter = st.selectbox("Neighborhood", NEIGHBORHOODS)
+    nb_index = NEIGHBORHOODS.index(st.session_state["nb_filter"]) if st.session_state["nb_filter"] in NEIGHBORHOODS else 0
+    neighborhood_filter = st.selectbox("Neighborhood", NEIGHBORHOODS, index=nb_index)
+    st.session_state["nb_filter"] = neighborhood_filter
 with sc3:
     st.write("")
     search_btn = st.button("Search", type="primary", use_container_width=True)
