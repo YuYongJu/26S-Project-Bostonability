@@ -198,6 +198,28 @@ def list_locations():
         cursor.close()
 
 
+# POST /locations — create a new location. Body: {street_name, neighborhood_name, zip_code}
+@locations_tickets.route("/locations", methods=["POST"])
+def create_location():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    try:
+        data = request.get_json() or {}
+        if not data.get("street_name"):
+            return jsonify({"error": "street_name is required"}), 400
+        cursor.execute(
+            "INSERT INTO location (street_name, neighborhood_name, zip_code) VALUES (%s, %s, %s)",
+            (data["street_name"], data.get("neighborhood_name"), data.get("zip_code")),
+        )
+        db.commit()
+        return jsonify({"location_id": cursor.lastrowid}), 201
+    except Error as e:
+        db.rollback()
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+
 # GET /locations/{id} — view a single location with its obstructions.
 # [Sally-2][John-6]
 @locations_tickets.route("/locations/<int:location_id>", methods=["GET"])
