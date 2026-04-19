@@ -1,5 +1,7 @@
 from flask import Flask
+from flask.json.provider import DefaultJSONProvider
 from dotenv import load_dotenv
+from datetime import timedelta
 import os
 import logging
 
@@ -10,8 +12,21 @@ from backend.locations_tickets.routes import locations_tickets
 from backend.analytics.analytics_routes import analytics
 
 
+# MySQL TIME columns arrive as Python timedelta, which Flask's default
+# JSON encoder can't serialize. Render them as HH:MM:SS strings.
+class BostonabilityJSONProvider(DefaultJSONProvider):
+    def default(self, obj):
+        if isinstance(obj, timedelta):
+            total = int(obj.total_seconds())
+            h, rem = divmod(total, 3600)
+            m, s = divmod(rem, 60)
+            return f"{h:02d}:{m:02d}:{s:02d}"
+        return super().default(obj)
+
+
 def create_app():
     app = Flask(__name__)
+    app.json = BostonabilityJSONProvider(app)
 
     app.logger.setLevel(logging.DEBUG)
     app.logger.info('API startup')
