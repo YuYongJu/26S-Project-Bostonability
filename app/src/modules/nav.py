@@ -19,27 +19,40 @@ def about_page_nav():
 
 def pol_strat_home_nav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/00_Analyst_Home.py", label="Data Analyst Home", icon="👤"
     )
 
 
 def world_bank_viz_nav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Accessibility_Dashboard.py", label="Accessibility Dashboard", icon="🏦"
     )
 
 
 def map_demo_nav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+    st.sidebar.page_link("pages/02_Analyst_Trends_Exports.py", label="Trends & Exports", icon="🗺️")
 
 
 # ---- Role: usaid_worker -----------------------------------------------------
 
 def usaid_worker_home_nav():
     st.sidebar.page_link(
-        "pages/10_USAID_Worker_Home.py", label="USAID Worker Home", icon="🏠"
+        "pages/10_Basic_User_Home.py", label="User Home", icon="🏠"
     )
 
+def prediction_nav():
+    st.sidebar.page_link(
+    "pages/11_Report_Obstruction.py", label="Report Obstruction", icon="📈"
+)
+
+#OLD API TEST TAB
+def api_test_nav():
+    st.sidebar.page_link("pages/12_Find_Accessibility_Info.py", label="Find Accessibility_Info", icon="🛜")
+
+def classification_nav():
+    st.sidebar.page_link(
+        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
+    )
 
 def ngo_directory_nav():
     st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
@@ -48,21 +61,6 @@ def ngo_directory_nav():
 def add_ngo_nav():
     st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
 
-
-def prediction_nav():
-    st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
-
-
-def api_test_nav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-
-def classification_nav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
 
 
 # ---- Role: administrator ----------------------------------------------------
@@ -98,12 +96,12 @@ def SideBarLinks(show_home=False):
 
     if st.session_state["authenticated"]:
 
-        if st.session_state["role"] == "pol_strat_advisor":
+        if st.session_state["role"] == "analyst":
             pol_strat_home_nav()
             world_bank_viz_nav()
             map_demo_nav()
 
-        if st.session_state["role"] == "usaid_worker":
+        if st.session_state["role"] == "user":
             usaid_worker_home_nav()
             ngo_directory_nav()
             add_ngo_nav()
@@ -111,7 +109,7 @@ def SideBarLinks(show_home=False):
             api_test_nav()
             classification_nav()
 
-        if st.session_state["role"] == "administrator":
+        if st.session_state["role"] == "admin":
             admin_home_nav()
             ml_model_mgmt_nav()
 
