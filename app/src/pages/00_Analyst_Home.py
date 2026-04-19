@@ -17,7 +17,12 @@ if st.button('View Neighborhood Accessibility Dashboard',
              use_container_width=True):
     st.switch_page('pages/01_Accessibility_Dashboard.py')
 
-if st.button('View Trends & Exports',
+if st.button('View Trends',
              type='primary',
              use_container_width=True):
     st.switch_page('pages/02_Analyst_Trends_Exports.py')
+
+if st.button('View Reports',
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/03_View_Reports.py')
