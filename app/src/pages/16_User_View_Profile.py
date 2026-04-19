@@ -30,13 +30,25 @@ except Exception:
         "last_name": "",
         "email": "",
         "phone": "",
-        "disability_type": "Wheelchair",
+        "disability_types": [],
         "wheelchair_width": 24,
         "wheelchair_electric": False,
         "uses_white_cane": False,
     }
 
 st.divider()
+
+DISABILITY_OPTIONS = [
+    "Wheelchair",
+    "Sight impairment",
+    "Walking stick / cane",
+    "None / prefer not to say",
+]
+
+stored = user.get("disability_types") or user.get("disability_type") or []
+if isinstance(stored, str):
+    stored = [stored] if stored else []
+current_disabilities = [d for d in stored if d in DISABILITY_OPTIONS]
 
 left_col, right_col = st.columns([1, 2])
 
@@ -50,7 +62,7 @@ with left_col:
                 {user.get('first_name', '')} {user.get('last_name', '')}
             </div>
             <div style="text-align:center;color:#888;font-size:0.85rem;">
-                Member | ID {user_id}
+                Member - ID {user_id}
             </div>
         </div>
         """,
@@ -60,20 +72,11 @@ with left_col:
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown("**Disability / Mobility Profile**")
-    disability_options = [
-        "Wheelchair",
-        "Sight impairment",
-        "Walking stick / cane",
-        "None / prefer not to say",
-    ]
-    current_disability = user.get("disability_type", "Wheelchair")
-    if current_disability not in disability_options:
-        current_disability = disability_options[0]
-
-    selected_disability = st.radio(
-        "Disability type",
-        disability_options,
-        index=disability_options.index(current_disability),
+    st.caption("Select all that apply.")
+    selected_disabilities = st.multiselect(
+        "Disability types",
+        DISABILITY_OPTIONS,
+        default=current_disabilities,
         label_visibility="collapsed",
     )
 
@@ -94,7 +97,7 @@ with right_col:
         st.markdown("---")
         st.markdown("#### Accessibility Preferences")
 
-        if selected_disability == "Wheelchair":
+        if "Wheelchair" in selected_disabilities:
             st.markdown("**Wheelchair details**")
             wc1, wc2 = st.columns(2)
             with wc1:
@@ -108,16 +111,16 @@ with right_col:
                 electric = st.checkbox("Electric wheelchair",
                                        value=bool(user.get("wheelchair_electric", False)))
 
-        elif selected_disability == "Sight impairment":
+        if "Sight impairment" in selected_disabilities:
             st.markdown("**Sight impairment details**")
             white_cane = st.checkbox("Uses white cane",
                                      value=bool(user.get("uses_white_cane", False)))
 
-        elif selected_disability == "Walking stick / cane":
+        if "Walking stick / cane" in selected_disabilities:
             st.markdown("**Mobility aid details**")
             st.checkbox("Uses walking stick", value=True, disabled=True)
 
-        else:
+        if not selected_disabilities or selected_disabilities == ["None / prefer not to say"]:
             st.info("No accessibility-specific preferences needed.")
 
         save_btn = st.form_submit_button("Save Profile", type="primary",
@@ -129,12 +132,12 @@ with right_col:
             "last_name": new_last.strip(),
             "email": new_email.strip(),
             "phone": new_phone.strip(),
-            "disability_type": selected_disability,
+            "disability_types": selected_disabilities,
         }
-        if selected_disability == "Wheelchair":
+        if "Wheelchair" in selected_disabilities:
             payload["wheelchair_width"] = chair_width
             payload["wheelchair_electric"] = electric
-        elif selected_disability == "Sight impairment":
+        if "Sight impairment" in selected_disabilities:
             payload["uses_white_cane"] = white_cane
 
         try:
