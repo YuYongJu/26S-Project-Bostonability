@@ -49,21 +49,35 @@ st.markdown(f"Welcome back, **{st.session_state['first_name']}**.")
 API_BASE = "http://web-api:4000"
 
 
+SAMPLE_DATA = [
+    {"report_id": 1, "report_status": "Open",        "urgency": 4, "issue_type_name": "Ramp issue",      "neighborhood_name": "Roxbury",       "report_date": "2024-03-01"},
+    {"report_id": 2, "report_status": "Resolved",    "urgency": 2, "issue_type_name": "Sidewalk issue",  "neighborhood_name": "Back Bay",       "report_date": "2024-03-05"},
+    {"report_id": 3, "report_status": "In Progress", "urgency": 5, "issue_type_name": "Entrance issue",  "neighborhood_name": "Jamaica Plain",  "report_date": "2024-03-10"},
+    {"report_id": 4, "report_status": "Closed",      "urgency": 1, "issue_type_name": "Transport issue", "neighborhood_name": "South End",      "report_date": "2024-03-12"},
+    {"report_id": 5, "report_status": "Open",        "urgency": 3, "issue_type_name": "Ramp issue",      "neighborhood_name": "Allston",        "report_date": "2024-03-15"},
+    {"report_id": 6, "report_status": "Resolved",    "urgency": 4, "issue_type_name": "Sidewalk issue",  "neighborhood_name": "Roxbury",        "report_date": "2024-03-18"},
+    {"report_id": 7, "report_status": "Open",        "urgency": 5, "issue_type_name": "Entrance issue",  "neighborhood_name": "Back Bay",       "report_date": "2024-03-20"},
+]
+
+
 @st.cache_data(ttl=60)
 def fetch_reports():
     try:
         r = requests.get(f"{API_BASE}/reports", timeout=5)
         r.raise_for_status()
-        return pd.DataFrame(r.json())
+        return pd.DataFrame(r.json()), False
     except Exception as e:
-        logger.error(f"Failed to fetch reports: {e}")
-        return None
+        logger.warning(f"API unavailable, using sample data: {e}")
+        return pd.DataFrame(SAMPLE_DATA), True
 
 
-df = fetch_reports()
+df, using_sample = fetch_reports()
+
+if using_sample:
+    st.warning("⚠️ API unavailable — showing sample data. Run `docker compose up` to load live data.", icon="⚠️")
 
 if df is None or df.empty:
-    st.error("Could not load report data. Please ensure the API server is running.")
+    st.error("Could not load report data.")
     st.stop()
 
 # --- Compute metrics ---
