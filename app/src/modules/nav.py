@@ -12,7 +12,7 @@ def home_nav():
 
 
 def about_page_nav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/30_About.py", label="About", icon="ℹ️")
 
 
 # ---- Role: analyst ------------------------------------------------
@@ -31,7 +31,7 @@ def analyst_dashboard_nav():
 
 def analyst_reports_nav():
     st.sidebar.page_link(
-        "pages/22_Manage_Reports.py", label="Reports", icon="📋"
+        "pages/03_View_Reports.py", label="Reports", icon="📋"
     )
 
 
@@ -73,7 +73,7 @@ def manage_users_nav():
 
 def manage_reports_nav():
     st.sidebar.page_link(
-        "pages/22_Manage_Reports.py", label="Manage Reports", icon="🗂️"
+        "pages/03_View_Reports.py", label="Manage Reports", icon="🗂️"
     )
 
 
