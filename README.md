@@ -18,14 +18,14 @@ Built as the Spring 2026 CS 3200 semester project by **The Ocelots**.
 
 ## Personas
 
-Bostonability serves four distinct user roles:
+Bostonability serves distinct user roles:
 
 | Persona | Role | Core needs |
 |---|---|---|
 | **Paul Baker** | Urban accessibility policy analyst | Dashboards, trends, neighborhood breakdowns, exports for City Council |
 | **Wilson Lampisyobiford** | System administrator | User/role management, data quality review, aggregate stats, audit logs |
 | **Sally Locke** | Wheelchair-using resident | Find and avoid obstructions (potholes, steep inclines, no-sidewalk stretches), tailored to her mobility profile |
-| **John Marcus** | Daily cyclist commuter | Plowed-street map, submit snow-plow requests, manage his own hazard reports, find bike-lane coverage |
+
 
 ## Architecture
 
