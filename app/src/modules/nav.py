@@ -73,7 +73,7 @@ def manage_users_nav():
 
 def manage_reports_nav():
     st.sidebar.page_link(
-        "pages/03_View_Reports.py", label="Manage Reports", icon="🗂️"
+        "pages/22_Manage_Reports.py", label="Manage Reports", icon="🗂️"
     )
 
 
