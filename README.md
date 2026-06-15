@@ -10,7 +10,7 @@ Orbit is an app for CS 3200 focused on student financial operations. The platfor
 - Samuel Shrestha
 - Sharon Wilfred
 - Sally Esquith
-
+- Addison Apisarnthanarax
 
 
 ## Project Overview
